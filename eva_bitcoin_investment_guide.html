@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eva's Bitcoin Investment Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .booklet {
+            max-width: 8.5in;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .page {
+            min-height: 11in;
+            padding: 1in;
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        /* Cover Page */
+        .cover-page {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: white;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .cover-content {
+            z-index: 2;
+            position: relative;
+        }
+
+        .bitcoin-symbol {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #f7931a, #ff6b35);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            font-weight: bold;
+            margin: 0 auto 30px;
+            box-shadow: 0 20px 40px rgba(247, 147, 26, 0.3);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 20px 40px rgba(247, 147, 26, 0.3); }
+            to { box-shadow: 0 20px 60px rgba(247, 147, 26, 0.6); }
+        }
+
+        .cover-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff, #f1f5f9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cover-subtitle {
+            font-size: 1.8rem;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .cover-personal {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cover-name {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #f7931a;
+            margin-bottom: 10px;
+        }
+
+        .cover-tagline {
+            font-size: 1.2rem;
+            color: #e2e8f0;
+        }
+
+        /* Content Pages */
+        .page-header {
+            border-bottom: 3px solid #f7931a;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            font-weight: 400;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #f7931a, #ff6b35);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 5px solid #f59e0b;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .highlight-title {
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .strategy-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .strategy-card:hover {
+            border-color: #f7931a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-title {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .card-amount {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #f7931a;
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefits-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .benefits-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            background: #d1fae5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .projection-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .projection-table th {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .projection-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .projection-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .positive {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .negative {
+            color: #ef4444;
+            font-weight: 600;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+            border-left: 5px solid #8b5cf6;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #5b21b6;
+        }
+
+        .footer-note {
+            margin-top: auto;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+            font-size: 0.9rem;
+            color: #64748b;
+            text-align: center;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-left: 5px solid #ef4444;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .warning-title {
+            font-weight: 700;
+            color: #dc2626;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #f7931a;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: #f7931a;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #f7931a;
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .timeline-description {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        @media print {
+            .page {
+                page-break-after: always;
+                box-shadow: none;
+            }
+            body {
+                background: white;
+            }
+            .booklet {
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page {
+                padding: 0.5in;
+                min-height: auto;
+            }
+            .cover-title {
+                font-size: 2.5rem;
+            }
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="booklet">
+        <!-- Cover Page -->
+        <div class="page cover-page">
+            <div class="cover-content">
+                <div class="bitcoin-symbol">₿</div>
+                <h1 class="cover-title">Bitcoin Investment Guide</h1>
+                <p class="cover-subtitle">A Smart Approach to Building Wealth</p>
+                
+                <div class="cover-personal">
+                    <div class="cover-name">For Eva Altvater</div>
+                    <div class="cover-tagline">Your Journey to Financial Independence</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 1: Introduction -->
+        <div class="page">
+            <div class="page-header">
+                <h1 class="page-title">Dear Eva,</h1>
+                <p class="page-subtitle">Your Guide to Smart Bitcoin Investing</p>
+            </div>
+
+            <div class="section">
+                <p style="font-size: 1.1rem; margin-bottom: 25px;">
+                    This guide is designed specifically for you to understand and implement a simple, powerful investment strategy using Bitcoin. The goal is long-term wealth building through consistent, disciplined investing—a strategy that has historically created substantial wealth for patient investors.
+                </p>
+
+                <div class="highlight-box">
+                    <div class="highlight-title">🎯 Your Investment Goal</div>
+                    <p>Build long-term wealth through consistent Bitcoin investments of $50 per week, totaling $2,600 per year. This "set it and forget it" approach removes emotional decision-making and focuses on time in the market rather than timing the market.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-icon">📈</div>
+                    Why Dollar-Cost Averaging (DCA)?
+                </div>
+                
+                <ul class="benefits-list">
+                    <li><strong>Reduces Risk:</strong> By investing the same amount regularly, you buy more when prices are low and less when prices are high</li>
+                    <li><strong>Removes Emotion:</strong> No need to guess the "perfect" time to invest—consistency wins over timing</li>
+                    <li><strong>Builds Discipline:</strong> Creates a systematic approach to wealth building</li>
+                    <li><strong>Historical Success:</strong> DCA has proven effective across all major asset classes over long periods</li>
+                    <li><strong>Simplicity:</strong> Easy to understand and implement—perfect for busy lifestyles</li>
+                </ul>
+            </div>
+
+            <div class="quote-box">
+                "The best time to plant a tree was 20 years ago. The second best time is now." - Chinese Proverb
+            </div>
+        </div>
+
+        <!-- Page 2: Your Strategy Details -->
+        <div class="page">
+            <div class="page-header">
+                <h1 class="page-title">Your Bitcoin Strategy</h1>
+                <p class="page-subtitle">Simple, Consistent, Powerful</p>
+            </div>
+
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <div class="card-title">Weekly Investment</div>
+                    <div class="card-amount">$50</div>
+                    <div class="card-description">Every week, automatically invest $50 in Bitcoin regardless of price</div>
+                </div>
+
+                <div class="strategy-card">
+                    <div class="card-title">Annual Total</div>
+                    <div class="card-amount">$2,600</div>
+                    <div class="card-description">Your total yearly investment across 52 weeks</div>
+                </div>
+
+                <div class="strategy-card">
+                    <div class="card-title">Time Horizon</div>
+                    <div class="card-amount">Long-term</div>
+                    <div class="card-description">Minimum 5-10 years for optimal results</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-icon">🎯</div>
+                    12-Month Projections
+                </div>
+                
+                <p style="margin-bottom: 20px;">Based on current analyst forecasts and historical patterns, here's what your $2,600 investment could become after one year:</p>
+
+                <table class="projection-table">
+                    <thead>
+                        <tr>
+                            <th>Scenario</th>
+                            <th>Portfolio Value</th>
+                            <th>Profit/Loss</th>
+                            <th>Return %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Conservative</td>
+                            <td>$2,238</td>
+                            <td class="negative">-$362</td>
+                            <td class="negative">-13.9%</td>
+                        </tr>
+                        <tr>
+                            <td>Moderate</td>
+                            <td>$3,193</td>
+                            <td class="positive">+$593</td>
+                            <td class="positive">+22.8%</td>
+                        </tr>
+                        <tr>
+                            <td>Optimistic</td>
+                            <td>$3,708</td>
+                            <td class="positive">+$1,108</td>
+                            <td class="positive">+42.6%</td>
+                        </tr>
+                        <tr>
+                            <td>Bullish</td>
+                            <td>$4,147</td>
+                            <td class="positive">+$1,547</td>
+                            <td class="positive">+59.5%</td>
+                        </tr>
+                        <tr>
+                            <td>Very Bullish</td>
+                            <td>$4,598</td>
+                            <td class="positive">+$1,998</td>
+                            <td class="positive">+76.8%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box">
+                <div class="highlight-title">💡 Key Insight</div>
+                <p>Notice that even in the moderate scenario, your returns significantly outpace traditional savings accounts and most conservative investments. The potential upside is substantial, while the DCA approach helps minimize downside risk.</p>
+            </div>
+        </div>
+
+        <!-- Page 3: Understanding Bitcoin -->
+        <div class="page">
+            <div class="page-header">
+                <h1 class="page-title">Understanding Bitcoin</h1>
+                <p class="page-subtitle">Why This Digital Asset Matters</p>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-icon">🔍</div>
+                    What Makes Bitcoin Special?
+                </div>
+                
+                <ul class="benefits-list">
+                    <li><strong>Limited Supply:</strong> Only 21 million Bitcoin will ever exist—true digital scarcity</li>
+                    <li><strong>Decentralized:</strong> No single government or institution controls it</li>
+                    <li><strong>Global Access:</strong> Available 24/7, anywhere in the world</li>
+                    <li><strong>Transparency:</strong> All transactions are recorded on a public blockchain</li>
+                    <li><strong>Store of Value:</strong> Often called "digital gold" for its scarcity properties</li>
+                    <li><strong>Inflation Hedge:</strong> Fixed supply makes it resistant to currency debasement</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-icon">📊</div>
+                    Historical Performance
+                </div>
+                
+                <p style="margin-bottom: 20px;">Bitcoin has been the best-performing asset class over the past decade:</p>
+                
+                <div class="highlight-box">
+                    <div class="highlight-title">📈 Historical Returns (2011-2022)</div>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin: 10px 0;"><strong>Average Annual Return:</strong> 148% (Compound Annual Growth Rate)</li>
+                        <li style="margin: 10px 0;"><strong>Positive Years:</strong> 9 out of 12 years (75% success rate)</li>
+                        <li style="margin: 10px 0;"><strong>Best Year:</strong> 5,507% gain (2013)</li>
+                        <li style="margin: 10px 0;"><strong>Comparison:</strong> Outperformed stocks, gold, and real estate by wide margins</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-icon">⚖️</div>
+                    Risk vs. Reward
+                </div>
+                
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <div class="card-title">High Volatility</div>
+                        <div class="card-description">Bitcoin can swing 20-50% in short periods. This volatility creates both opportunity and risk.</div>
+                    </div>
+
+                    <div class="strategy-card">
+                        <div class="card-title">Long-term Trend</div>
+                        <div class="card-description">Despite volatility, the long-term trend has been strongly upward due to increasing adoption.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                "Bitcoin is a remarkable cryptographic achievement, and the ability to create something that is not duplicable in the digital world has enormous value." - Eric Schmidt, Former Google CEO
+            </div>
+        </div>
+
+        <!-- Page 4: Implementation Guide -->
+        <div class="page">
+            <div class="page-header">
+                <h1 class="page-title">Getting Started</h1>
+                <p class="page-subtitle">Your Step-by-Step Action Plan</p>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-icon">🚀</div>
+                    Implementation Timeline
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-title">Week 1: Setup</div>
+                        <div class="timeline-description">Choose a reputable exchange (Coinbase, Kraken, or Gemini), complete verification, and link your bank account</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-title">Week 2: First Purchase</div>
+                        <div class="timeline-description">Make your first $50 Bitcoin purchase to familiarize yourself with the process</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-title">Week 3: Automation</div>
+                        <div class="timeline-description">Set up automatic weekly purchases of $50 every week on the same day</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-title">Ongoing: Monitor & Hold</div>
+                        <div class="timeline-description">Check your investment monthly (not daily!), but resist the urge to sell during market volatility</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-icon">🛡️</div>
+                    Security Best Practices
+                </div>
+                
+                <ul class="benefits-list">
+                    <li><strong>Use Reputable Exchanges:</strong> Stick to well-known, regulated platforms</li>
+                    <li><strong>Enable Two-Factor Authentication:</strong> Add extra security to your account</li>
+                    <li><strong>Consider Hardware Wallets:</strong> For large holdings, store Bitcoin offline</li>
+                    <li><strong>Keep Records:</strong> Track purchases for tax purposes</li>
+                    <li><strong>Never Share Private Keys:</strong> Keep your wallet information secure</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <div class="highlight-title">💰 Tax Considerations</div>
+                <p>Bitcoin is treated as property by the IRS. Keep detailed records of all purchases, including dates and amounts. DCA makes this easier since you'll have regular, documented transactions. Consider consulting a tax professional for specific guidance.</p>
+            </div>
+
+            <div class="warning-box">
+                <div class="warning-title">⚠️ Important Reminders</div>
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li>Only invest what you can afford to lose completely</li>
+                    <li>Bitcoin is highly volatile—prepare for significant price swings</li>
+                    <li>This is a long-term strategy—avoid checking prices daily</li>
+                    <li>Past performance doesn't guarantee future results</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Page 5: Mindset & Psychology -->
+        <div class="page">
+            <div class="page-header">
+                <h1 class="page-title">The Investor Mindset</h1>
+                <p class="page-subtitle">Building Wealth Requires the Right Psychology</p>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-icon">🧠</div>
+                    Think Like a Long-term Investor
+                </div>
+                
+                <p style="margin-bottom: 25px;">The biggest enemy of successful investing is often ourselves. Here's how to maintain the right mindset:</p>
+                
+                <ul class="benefits-list">
+                    <li><strong>Ignore Daily Noise:</strong> Price movements today don't matter for your 10-year plan</li>
+                    <li><strong>Embrace Volatility:</strong> Market dips are buying opportunities, not reasons to panic</li>
+                    <li><strong>Stay Consistent:</strong> Your weekly $50 investment should be automatic, like paying rent</li>
+                    <li><strong>Focus on Time, Not Timing:</strong> Years in the market beat timing the market</li>
+                    <li><strong>Celebrate Milestones:</strong> Track your progress in Bitcoin accumulated, not just dollar value</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-icon">📱</div>
+                    Managing Information Overload
+                </div>
+                
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <div class="card-title">Limit Price Checking</div>
+                        <div class="card-description">Check your portfolio monthly, not daily. Daily volatility can trigger emotional decisions.</div>
+                    </div>
+
+                    <div class="strategy-card">
+                        <div class="card-title">Quality Information</div>
+                        <div class="card-description">Follow educational content about Bitcoin fundamentals, not price prediction "experts."</div>
+                    </div>
+
+                    <div class="strategy-card">
+                        <div class="card-title">Community Support</div>
+                        <div class="card-description">Connect with other long-term Bitcoin investors who share your patient approach.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                "The stock market is a device for transferring money from the impatient to the patient." - Warren Buffett (This applies to Bitcoin too!)
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-icon">🎯</div>
+                    Measuring Success
+                </div>
+                
+                <p style="margin-bottom: 20px;">Success in DCA investing isn't measured by daily gains, but by:</p>
+                
+                <div class="highlight-box">
+                    <div class="highlight-title">📊 Your Success Metrics</div>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin: 10px 0;">✅ <strong>Consistency:</strong> Never missing your weekly $50 investment</li>
+                        <li style="margin: 10px 0;">✅ <strong>Accumulation:</strong> Steadily building your Bitcoin holdings</li>
+                        <li style="margin: 10px 0;">✅ <strong>Discipline:</strong> Not selling during market downturns</li>
+                        <li style="margin: 10px 0;">✅ <strong>Education:</strong> Continuously learning about Bitcoin and investing</li>
+                        <li style="margin: 10px 0;">✅ <strong>Patience:</strong> Staying focused on your long-term goals</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back Page: Summary & Encouragement -->
+        <div class="page">
+            <div class="page-header">
+                <h1 class="page-title">Your Bright Financial Future</h1>
+                <p class="page-subtitle">A Personal Message for Eva</p>
+            </div>
+
+            <div class="section">
+                <p style="font-size: 1.2rem; margin-bottom: 30px; color: #1e293b;">
+                    Eva, this investment strategy is more than just buying Bitcoin—it's about building discipline, thinking long-term, and creating wealth that can provide you with options and freedom in the future.
+                </p>
+
+                <div class="highlight-box">
+                    <div class="highlight-title">🌟 Your Investment Journey</div>
+                    <p>Starting with just $50 per week, you're building a foundation that could grow into substantial wealth. Historical data suggests that patient, consistent investors are rewarded handsomely over time. Your future self will thank you for starting today.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-icon">💝</div>
+                    Key Takeaways
+                </div>
+                
+                <ul class="benefits-list">
+                    <li><strong>Start Today:</strong> Time is your greatest asset—the earlier you start, the more you benefit from compound growth</li>
+                    <li><strong>Stay Consistent:</strong> $50 every week, regardless of Bitcoin's price that day</li>
+                    <li><strong>Think Long-term:</strong> This is a 5-10 year strategy, not a get-rich-quick scheme</li>
+                    <li><strong>Embrace Learning:</strong> Continue educating yourself about Bitcoin and investing</li>
+                    <li><strong>Stay Patient:</strong> Volatility is normal—focus on your long-term goals</li>
+                    <li><strong>Trust the Process:</strong> DCA has worked historically and is your best approach</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-icon">🚀</div>
+                    Looking Ahead: Potential Scenarios
+                </div>
+                
+                <p style="margin-bottom: 20px;">Based on historical patterns and current market analysis, here's what your consistent investing could achieve:</p>
+                
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <div class="card-title">5 Years</div>
+                        <div class="card-amount">$13,000+</div>
+                        <div class="card-description">Conservative estimate based on modest Bitcoin appreciation</div>
+                    </div>
+
+                    <div class="strategy-card">
+                        <div class="card-title">10 Years</div>
+                        <div class="card-amount">$26,000+</div>
+                        <div class="card-description">Total investment if you continue the strategy consistently</div>
+                    </div>
+
+                    <div class="strategy-card">
+                        <div class="card-title">Potential Value</div>
+                        <div class="card-amount">$50,000+</div>
+                        <div class="card-description">Conservative growth scenario based on historical averages</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <div class="highlight-title">🎓 Educational Mindset</div>
+                    <p>Remember, this investment is also an education in financial markets, digital assets, and wealth building. The knowledge and discipline you develop will serve you throughout your entire financial life, far beyond just this Bitcoin investment.</p>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                "Eva, your commitment to consistent investing today is planting seeds for a financially independent tomorrow. Stay the course, trust the process, and let time work its magic." - Your Investment Guide
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-icon">📞</div>
+                    Resources & Support
+                </div>
+                
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <div class="card-title">Educational Resources</div>
+                        <div class="card-description">
+                            • "The Bitcoin Standard" by Saifedean Ammous<br>
+                            • Bitcoin.org for technical information<br>
+                            • Coinbase Learn for basic education
+                        </div>
+                    </div>
+
+                    <div class="strategy-card">
+                        <div class="card-title">Recommended Exchanges</div>
+                        <div class="card-description">
+                            • Coinbase (beginner-friendly)<br>
+                            • Kraken (advanced features)<br>
+                            • Gemini (security-focused)
+                        </div>
+                    </div>
+
+                    <div class="strategy-card">
+                        <div class="card-title">Tracking Tools</div>
+                        <div class="card-description">
+                            • CoinTracker for tax reporting<br>
+                            • Blockfolio for portfolio tracking<br>
+                            • Spreadsheet for DCA records
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <div class="warning-title">📋 Final Important Notes</div>
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li><strong>Risk Acknowledgment:</strong> Bitcoin can lose significant value, including potentially going to zero</li>
+                    <li><strong>Regulatory Risk:</strong> Future government regulations could impact Bitcoin's value</li>
+                    <li><strong>Technology Risk:</strong> While unlikely, technical issues could affect the Bitcoin network</li>
+                    <li><strong>Personal Responsibility:</strong> Only you can decide if this investment aligns with your risk tolerance</li>
+                    <li><strong>Professional Advice:</strong> Consider consulting a financial advisor for personalized guidance</li>
+                </ul>
+            </div>
+
+            <div class="section" style="text-align: center; margin-top: 40px;">
+                <div style="background: linear-gradient(135deg, #f7931a, #ff6b35); color: white; padding: 30px; border-radius: 20px; margin: 20px 0;">
+                    <h2 style="margin-bottom: 15px; font-family: 'Playfair Display', serif;">Your Investment Commitment</h2>
+                    <p style="font-size: 1.1rem; margin-bottom: 20px;">I, Eva Altvater, commit to investing $50 per week in Bitcoin for the long term, understanding both the risks and potential rewards.</p>
+                    <div style="border-top: 2px solid rgba(255,255,255,0.3); padding-top: 20px; margin-top: 20px;">
+                        <p style="margin: 5px 0;">Start Date: ________________</p>
+                        <p style="margin: 5px 0;">Signature: ________________</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-note">
+                <p><strong>Remember Eva:</strong> This journey is about more than money—it's about building financial discipline, understanding emerging technologies, and creating options for your future. Stay consistent, stay educated, and stay patient. Your future self will thank you.</p>
+                <br>
+                <p style="font-style: italic;">Created with love and hope for your financial success • July 2025</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add print functionality
+        function printGuide() {
+            window.print();
+        }
+
+        // Add smooth scrolling for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add page numbers for print
+            const pages = document.querySelectorAll('.page');
+            pages.forEach((page, index) => {
+                if (index > 0) { // Skip cover page
+                    const pageNumber = document.createElement('div');
+                    pageNumber.style.cssText = 'position: absolute; bottom: 0.5in; right: 1in; font-size: 12px; color: #64748b;';
+                    pageNumber.textContent = `Page ${index}`;
+                    page.appendChild(pageNumber);
+                }
+            });
+        });
+
+        // Add a print button (optional)
+        const printButton = document.createElement('button');
+        printButton.textContent = '🖨️ Print Guide';
+        printButton.style.cssText = 'position: fixed; top: 20px; right: 20px; padding: 10px 20px; background: #f7931a; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; z-index: 1000;';
+        printButton.onclick = printGuide;
+        document.body.appendChild(printButton);
+
+        // Hide print button when printing
+        window.addEventListener('beforeprint', () => {
+            printButton.style.display = 'none';
+        });
+        
+        window.addEventListener('afterprint', () => {
+            printButton.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
